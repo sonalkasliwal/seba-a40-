@@ -1,0 +1,44 @@
+Operational Status IGMP Channel
+Retrieved Parameters
+1.	–Number of failed join requests due to insufficient access permission //TODO
+2.	–Number of failed join requests due to insufficient bandwidth //TODO
+3.	–Number of failed join request due to unknown address: 
+If group address is not a multicast address or if source ip is invalid
+4.	–Number of seconds of overload protection- Duplicate from jira 41
+5.	–Current group number. From MEMBERSHIP_QUERY, for each group specific query, maintain unique group addresses. The number of values is equal to current group numbers.
+6.	–Number of failed join requests when maximum number of ports would be exceeded for the multicast port //TODO
+7.	–Number of failed join requests when maximum number of ports would be exceeded for the system //TODO
+8.	–Number of failed join requests due to multicast bandwidth limits //TODO
+9.	–Current number of IGMP channel joins: Whenever join is done. Increase the counter?
+10.	–Current number of unconfigured group //TODO
+For join, if group is null then new group is created using groupIp, vlan, deviceId, portNumber. If leave, then returned.
+11.	–Count of the number of general queries that have been transmitted: IGMPV3_MEMBERSHIP_QUERY. If group address is not provided in igmp query then general query.
+12.	–Count of the number of group specific queries that have been transmitted:
+IGMPV3_MEMBERSHIP_QUERY. If group address is provided in igmp query then group specific query.
+13.	–Count of V1 membership report requests received: Simple implementation. Although the igmp proxy doesnot provide supports v1.
+14.	–Count of V2 membership report requests received: Simple implementation
+15.	–Count of V3 membership report requests received: Simple implementation
+16.	–Count of received leave requests: Simple implementation
+17.	–Count of valid IGMP packets received: 
+18.	–Count of invalid IGMP packets received:
+As per rfc  2236
+	To be valid, the Query message(or any IGMP message) must be
+     at least 8 octets long, and have a correct IGMP checksum
+
+The group address in the IGMP header must either be zero (a General
+	     Query) or a valid multicast group address
+
+19.	–Count of unknown IGMP type packets received: Simple implementation
+20.	–Count of IGMP packets dropped because of invalid length //TODO
+21.	–Count of IGMP packets dropped because of invalid IP header checksum: Steps to Calculate and verify IPV4 checksum are mentioned here. https://en.wikipedia.org/wiki/IPv4_header_checksum
+https://www.thegeekstuff.com/2012/05/ip-header-checksum/
+Can be done by implementing verification logic in code.
+22.	–Count of IGMP packets dropped because of invalid IGMP header checksum:
+	As per rfc 2236 IGMPv2: (Need to explore more)
+The checksum is the 16-bit one's complement of the one's complement sum of the whole IGMP message (the entire IP payload).  For computing the checksum, the checksum field is set to zero.  When transmitting
+   	packets, the checksum MUST be computed and inserted into this field.
+   	When receiving packets, the checksum MUST be verified before
+  	processing a packet.
+As per rfc 
+23.	–Count of group specific queries sent on channel: Duplicate from jira 41
+24.	–Count of reports received with wrong mode: check with IGMPMembership mode value. 6 types of values are allowed
